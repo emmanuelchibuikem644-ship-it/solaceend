@@ -1,0 +1,20 @@
+{
+  "id2label": {
+    "0": "joy",
+    "1": "sadness",
+    "2": "anxiety",
+    "3": "fear",
+    "4": "anger",
+    "5": "stress",
+    "6": "neutral"
+  },
+  "label2id": {
+    "joy": 0,
+    "sadness": 1,
+    "anxiety": 2,
+    "fear": 3,
+    "anger": 4,
+    "stress": 5,
+    "neutral": 6
+  }
+}

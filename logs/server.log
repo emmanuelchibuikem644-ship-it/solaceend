@@ -1,0 +1,17 @@
+Watching for file changes with StatReloader
+Not Found: /
+"GET / HTTP/1.1" 404 2308
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2359
+"GET /api/chat HTTP/1.1" 301 0
+Internal Server Error: /api/chat/
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\solace-chatbox\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\solace-chatbox\env\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\user\Desktop\solace-chatbox\env\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view chatbackend.views.chat_api didn't return an HttpResponse object. It returned None instead.
+"GET /api/chat/ HTTP/1.1" 500 69678

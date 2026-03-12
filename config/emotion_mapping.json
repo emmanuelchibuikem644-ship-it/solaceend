@@ -1,0 +1,30 @@
+{
+  "admiration": "joy",
+  "amusement": "joy",
+  "approval": "joy",
+  "caring": "joy",
+  "excitement": "joy",
+  "gratitude": "joy",
+  "joy": "joy",
+  "love": "joy",
+  "optimism": "joy",
+  "pride": "joy",
+
+  "sadness": "sadness",
+  "disappointment": "sadness",
+  "grief": "sadness",
+  "remorse": "sadness",
+
+  "fear": "fear",
+  "nervousness": "anxiety",
+
+  "anger": "anger",
+  "annoyance": "anger",
+  "disapproval": "anger",
+
+  "confusion": "stress",
+  "embarrassment": "stress",
+  "realization": "stress",
+
+  "neutral": "neutral"
+}

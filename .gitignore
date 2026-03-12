@@ -1,0 +1,14 @@
+# Ignore ML model folder
+emotion_model/
+
+# Python environment
+env/
+
+# Local database
+db.sqlite3
+
+# Editor / OS files
+.vscode/
+__pycache__/
+.DS_Store
+Thumbs.db
