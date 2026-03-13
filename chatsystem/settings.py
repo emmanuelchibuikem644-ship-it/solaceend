@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+       "corsheaders",
 
     # Third-party apps
     'rest_framework',  # For API endpoints
@@ -61,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = 'chatsystem.urls'
@@ -147,7 +148,13 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     ]
 }
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # your local Next.js dev
+    "https://solacefon.vercel.app/",  # your deployed frontend
+]
 
+# OR allow all (for testing only)
+CORS_ALLOW_ALL_ORIGINS = True
 # -----------------------------
 # LOGGING (optional)
 # -----------------------------

@@ -15,3 +15,11 @@ Traceback (most recent call last):
     raise ValueError(
 ValueError: The view chatbackend.views.chat_api didn't return an HttpResponse object. It returned None instead.
 "GET /api/chat/ HTTP/1.1" 500 69678
+Watching for file changes with StatReloader
+C:\Users\user\Desktop\solace-chatbox\chatsystem\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\user\Desktop\solace-chatbox\chatsystem\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\user\Desktop\solace-chatbox\chatsystem\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\user\Desktop\solace-chatbox\chatsystem\settings.py changed, reloading.
