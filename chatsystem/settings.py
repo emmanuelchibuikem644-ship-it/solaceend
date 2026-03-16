@@ -47,13 +47,14 @@ INSTALLED_APPS = [
     'rest_framework',  # For API endpoints
 
     # Your chatbot app
-    'chatbot',  # Make sure your Django app for the chatbot is named 'chatbot'
+    'chatbackend',  # Make sure your Django app for the chatbot is named 'chatbot'
 ]
 
 # -----------------------------
 # MIDDLEWARE
 # -----------------------------
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-     "corsheaders.middleware.CorsMiddleware",
+     
 ]
 
 ROOT_URLCONF = 'chatsystem.urls'
@@ -150,7 +151,7 @@ REST_FRAMEWORK = {
 }
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # your local Next.js dev
-    "https://solacefon.vercel.app/",  # your deployed frontend
+    "https://solacefon.vercel.app",  # your deployed frontend
 ]
 
 # OR allow all (for testing only)
