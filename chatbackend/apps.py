@@ -4,6 +4,7 @@ from zipfile import ZipFile
 from django.apps import AppConfig
 import os
 
+
 class ChatbackendConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'chatbackend'
@@ -12,20 +13,31 @@ class ChatbackendConfig(AppConfig):
         base_dir = Path(__file__).resolve().parent.parent
         model_path = base_dir / "emotion_model"
 
-        if not model_path.exists():
+        if model_path.exists():
+            print("Emotion model already exists.")
+            return
+
+        try:
             print("Downloading emotion model...")
 
             url = "https://drive.google.com/uc?export=download&id=1fJQfDT0TSIHVp7VqzzfpeAmWGHrV2aiR"
             zip_path = base_dir / "emotion_model.zip"
 
             r = requests.get(url, stream=True)
+
             with open(zip_path, "wb") as f:
                 for chunk in r.iter_content(chunk_size=8192):
                     if chunk:
                         f.write(chunk)
 
+            print("Download complete. Extracting...")
+
             with ZipFile(zip_path, "r") as zip_ref:
                 zip_ref.extractall(base_dir)
 
             os.remove(zip_path)
+
             print("Emotion model downloaded successfully.")
+
+        except Exception as e:
+            print("Model download failed:", e)

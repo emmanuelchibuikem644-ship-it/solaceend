@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',  # For API endpoints
 
     # Your chatbot app
-    'chatbackend',  # Make sure your Django app for the chatbot is named 'chatbot'
+   "chatbackend.apps.ChatbackendConfig",  # Make sure your Django app for the chatbot is named 'chatbot'
 ]
 
 # -----------------------------
