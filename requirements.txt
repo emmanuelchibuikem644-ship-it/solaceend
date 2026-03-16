@@ -1,6 +1,7 @@
 Django==5.2.12
 djangorestframework==3.16.1
 gunicorn
+whitenoise
 django-cors-headers==4.9.0
 numpy==1.26.4
 scikit-learn==1.8.0

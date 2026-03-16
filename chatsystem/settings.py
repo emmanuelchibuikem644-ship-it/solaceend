@@ -21,33 +21,36 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # -----------------------------
 # SECURITY
 # -----------------------------
-# Keep your secret key secret in production!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-4@#tt6yw-5%3i(_fcv(!_%)8$vev(+555i=f#^e()278hn6%%@")
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-4@#tt6yw-5%3i(_fcv(!_%)8$vev(+555i=f#^e()278hn6%%@"
+)
 
-# DEBUG should be False in production
-DEBUG = os.environ.get("DJANGO_DEBUG", "False") == "False"
+# FIXED: correct debug logic
+DEBUG = os.environ.get("DJANGO_DEBUG", "False") == "True"
 
-# Add your domain or hosting URL in production
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost 127.0.0.1").split()
+# FIXED: allow render host
+ALLOWED_HOSTS = os.environ.get(
+    "DJANGO_ALLOWED_HOSTS",
+    "localhost 127.0.0.1 .onrender.com"
+).split()
 
 # -----------------------------
 # APPLICATIONS
 # -----------------------------
 INSTALLED_APPS = [
-    # Django default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-       "corsheaders",
 
-    # Third-party apps
-    'rest_framework',  # For API endpoints
+    "corsheaders",
 
-    # Your chatbot app
-   "chatbackend.apps.ChatbackendConfig",  # Make sure your Django app for the chatbot is named 'chatbot'
+    'rest_framework',
+
+    "chatbackend.apps.ChatbackendConfig",
 ]
 
 # -----------------------------
@@ -56,13 +59,16 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
+
+    # ADDED for static files on Render
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-     
 ]
 
 ROOT_URLCONF = 'chatsystem.urls'
@@ -73,7 +79,7 @@ ROOT_URLCONF = 'chatsystem.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # You can add templates here if needed
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,7 +98,7 @@ WSGI_APPLICATION = 'chatsystem.wsgi.application'
 # -----------------------------
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',  # You can switch to PostgreSQL in production
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
@@ -101,10 +107,10 @@ DATABASES = {
 # PASSWORD VALIDATION
 # -----------------------------
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 # -----------------------------
@@ -119,13 +125,17 @@ USE_TZ = True
 # STATIC FILES
 # -----------------------------
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / "staticfiles"  # Required for deployment
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # optional if you have static files
+    BASE_DIR / "static",
 ]
 
+# ADDED for Render static serving
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 # -----------------------------
-# MEDIA FILES (optional)
+# MEDIA FILES
 # -----------------------------
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
@@ -133,32 +143,37 @@ MEDIA_ROOT = BASE_DIR / "media"
 # -----------------------------
 # CHATBOT MODEL CONFIG
 # -----------------------------
-# Paths to your trained models and tokenizer
 CHATBOT_MODEL_PATH = BASE_DIR / "models" / "emotion_classifier"
 CHATBOT_TOKENIZER_PATH = BASE_DIR / "models" / "tokenizer"
 CHATBOT_MAX_LENGTH = 128
 
-# Emotion labels (optional, for mapping output indices to emotion names)
 EMOTION_LABELS = ["joy", "sadness", "anger", "fear", "surprise", "love"]
 
 # -----------------------------
-# REST FRAMEWORK SETTINGS
+# REST FRAMEWORK
 # -----------------------------
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
     ]
 }
+
+# -----------------------------
+# CORS SETTINGS
+# -----------------------------
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # your local Next.js dev
-    "https://solacefon.vercel.app",  # your deployed frontend
+    "http://localhost:3000",
+    "https://solacefon.vercel.app",
 ]
 
-# OR allow all (for testing only)
 CORS_ALLOW_ALL_ORIGINS = True
+
 # -----------------------------
-# LOGGING (optional)
+# LOGGING
 # -----------------------------
+LOGS_DIR = BASE_DIR / "logs"
+LOGS_DIR.mkdir(exist_ok=True)
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -166,7 +181,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'server.log',
+            'filename': LOGS_DIR / 'server.log',
         },
     },
     'loggers': {
