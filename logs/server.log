@@ -67,3 +67,16 @@ C:\Users\user\Desktop\solace-chatbox\chatsystem\settings.py changed, reloading.
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 C:\Users\user\Desktop\solace-chatbox\chatsystem\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+"GET / HTTP/1.1" 404 179
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 179
+"GET /api/chat/ HTTP/1.1" 200 29
+"GET /api/chat/ HTTP/1.1" 200 29
+"GET /api/chat/ HTTP/1.1" 200 29
+C:\Users\user\Desktop\solace-chatbox\env\Lib\site-packages\numpy\_typing\_array_like.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\user\Desktop\solace-chatbox\env\Lib\site-packages\scipy\constants\__init__.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\user\Desktop\solace-chatbox\env\Lib\site-packages\pandas\compat\_constants.py changed, reloading.
